@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FlashCards 500 mots anglais</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet" />
+  </head>
+  <body>
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+      <div class="header-inner">
+        <div class="logo">
+          <span class="logo-icon">🇸🇳</span>
+          <span class="logo-text">Flash<strong>500</strong></span>
+        </div>
+        <div class="header-streak" id="header-streak">
+          <span class="streak-flame">&#128293;</span>
+          <span id="streak-count">0</span> jours
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== NAV ===== -->
+    <nav class="bottom-nav">
+      <button
+        class="nav-btn active"
+        data-section="home"
+        onclick="showSection('home', this)">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+          <polyline points="9 22 9 12 15 12 15 22" />
+        </svg>
+        <span>Accueil</span>
+      </button>
+      <button
+        class="nav-btn"
+        data-section="review"
+        onclick="showSection('review', this)">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2">
+          <rect x="2" y="3" width="20" height="14" rx="2" />
+          <path d="M8 21h8M12 17v4" />
+        </svg>
+        <span>R&#233;viser</span>
+      </button>
+      <button
+        class="nav-btn"
+        data-section="words"
+        onclick="showSection('words', this)">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2">
+          <line x1="8" y1="6" x2="21" y2="6" />
+          <line x1="8" y1="12" x2="21" y2="12" />
+          <line x1="8" y1="18" x2="21" y2="18" />
+          <circle cx="3" cy="6" r="1" />
+          <circle cx="3" cy="12" r="1" />
+          <circle cx="3" cy="18" r="1" />
+        </svg>
+        <span>Mots</span>
+      </button>
+      <button
+        class="nav-btn"
+        data-section="add"
+        onclick="showSection('add', this)">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2">
+          <circle cx="12" cy="12" r="10" />
+          <line x1="12" y1="8" x2="12" y2="16" />
+          <line x1="8" y1="12" x2="16" y2="12" />
+        </svg>
+        <span>Ajouter</span>
+      </button>
+      <button
+        class="nav-btn"
+        data-section="settings"
+        onclick="showSection('settings', this)">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2">
+          <circle cx="12" cy="12" r="3" />
+          <path
+            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+        </svg>
+        <span>R&#233;glages</span>
+      </button>
+    </nav>
+
+    <!-- ===== MAIN ===== -->
+    <main class="main">
+      <!-- HOME -->
+      <section id="sec-home" class="section active">
+        <div class="daily-card">
+          <p class="welcome-sub">Bonne chance aujourd'hui !</p>
+          <h1 class="welcome-title">Apprends 15 mots/jour</h1>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card stat-purple">
+            <div class="stat-num" id="s-total">0</div>
+            <div class="stat-label">Total</div>
+          </div>
+          <div class="stat-card stat-teal">
+            <div class="stat-num" id="s-known">0</div>
+            <div class="stat-label">Ma&#238;tris&#233;s</div>
+          </div>
+          <div class="stat-card stat-orange">
+            <div class="stat-num" id="s-streak">0</div>
+            <div class="stat-label">Streak</div>
+          </div>
+          <div class="stat-card stat-pink">
+            <div class="stat-num" id="s-rate">0%</div>
+            <div class="stat-label">R&#233;ussite</div>
+          </div>
+        </div>
+
+        <div class="progress-section">
+          <div class="progress-header">
+            <span class="progress-label">Progression globale</span>
+            <span class="progress-pct" id="prog-pct">0%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="prog-fill" style="width: 0%"></div>
+          </div>
+          <p class="progress-sub" id="prog-label">
+            0 / 0 mots ma&#238;tris&#233;s
+          </p>
+        </div>
+
+        <div class="daily-card">
+          <div class="daily-left">
+            <div class="daily-icon">&#127919;</div>
+            <div>
+              <div class="daily-title">Objectif du jour</div>
+              <div class="daily-count" id="daily-progress">
+                0 / 15 r&#233;vis&#233;s
+              </div>
+            </div>
+          </div>
+          <div class="daily-ring-wrap">
+            <svg class="daily-ring" viewBox="0 0 40 40">
+              <circle
+                cx="20"
+                cy="20"
+                r="16"
+                fill="none"
+                stroke="#e9d8fd"
+                stroke-width="4" />
+              <circle
+                cx="20"
+                cy="20"
+                r="16"
+                fill="none"
+                stroke="#7c3aed"
+                stroke-width="4"
+                stroke-dasharray="100.53"
+                stroke-dashoffset="100.53"
+                stroke-linecap="round"
+                transform="rotate(-90 20 20)"
+                id="daily-ring-circle" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <div class="chart-card-title">Activit&#233; hebdomadaire</div>
+          <div class="bar-chart" id="week-chart"></div>
+        </div>
+
+        <div class="home-actions">
+          <button class="btn-primary btn-full" onclick="startSession('due')">
+            &#9654; R&#233;viser maintenant
+          </button>
+          <button class="btn-outline btn-full" onclick="startSession('new')">
+            &#10024; D&#233;couvrir de nouveaux mots
+          </button>
+        </div>
+      </section>
+
+      <!-- REVIEW -->
+      <section id="sec-review" class="section">
+        <div id="review-content"></div>
+      </section>
+
+      <!-- WORDS LIST -->
+      <section id="sec-words" class="section">
+        <div class="section-title-row">
+          <h2 class="section-title">Mes mots</h2>
+          <span class="section-count" id="words-count">0 mots</span>
+        </div>
+        <input
+          class="search-input"
+          id="search-input"
+          type="search"
+          placeholder="&#128269; Rechercher un mot..."
+          oninput="searchWords(this.value)" />
+        <div class="filter-pills" id="filter-pills">
+          <button class="pill active" onclick="filterWords('all', this)">
+            Tous
+          </button>
+          <button class="pill pill-blue" onclick="filterWords('new', this)">
+            Nouveaux
+          </button>
+          <button
+            class="pill pill-orange"
+            onclick="filterWords('learning', this)">
+            En cours
+          </button>
+          <button class="pill pill-green" onclick="filterWords('known', this)">
+            Ma&#238;tris&#233;s
+          </button>
+          <button class="pill pill-red" onclick="filterWords('review', this)">
+            &#192; revoir
+          </button>
+        </div>
+        <div class="word-list" id="word-list"></div>
+      </section>
+
+      <!-- ADD WORD -->
+      <section id="sec-add" class="section">
+        <h2 class="section-title">Ajouter un mot</h2>
+        <div class="add-card">
+          <div class="add-card-header">
+            <span class="add-card-icon">&#9997;</span>
+            <span>Saisie manuelle</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Mot anglais *</label>
+            <input
+              class="form-input"
+              id="in-eng"
+              type="text"
+              placeholder="ex: beautiful" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Traduction fran&#231;aise *</label>
+            <input
+              class="form-input"
+              id="in-fr"
+              type="text"
+              placeholder="ex: beau, magnifique" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Exemple d'utilisation</label>
+            <input
+              class="form-input"
+              id="in-ex"
+              type="text"
+              placeholder="ex: She has a beautiful smile." />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Cat&#233;gorie</label>
+            <select class="form-input" id="in-cat">
+              <option value="Verbes">Verbes</option>
+              <option value="Noms" selected>Noms</option>
+              <option value="Adjectifs">Adjectifs</option>
+              <option value="Adverbes">Adverbes</option>
+              <option value="Pronoms">Pronoms</option>
+              <option value="Autres">Autres</option>
+            </select>
+          </div>
+          <button class="btn-primary btn-full" onclick="addCustomWord()">
+            + Ajouter le mot
+          </button>
+          <div class="add-feedback" id="add-feedback"></div>
+        </div>
+
+        <div class="import-card">
+          <div class="import-icon">&#128196;</div>
+          <div class="import-text">
+            <strong>500 mots d&#233;j&#224; int&#233;gr&#233;s</strong>
+            <p>
+              Tous les mots du PDF ISpeakSpokeSpoken sont inclus. Tu peux en
+              ajouter d'autres ci-dessus.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SETTINGS -->
+      <section id="sec-settings" class="section">
+        <h2 class="section-title">R&#233;glages</h2>
+
+        <div class="settings-card">
+          <div class="settings-card-title">&#128276; Rappels quotidiens</div>
+          <div class="settings-row">
+            <span class="settings-label">Activer les rappels</span>
+            <div
+              class="toggle on"
+              id="notif-toggle"
+              onclick="this.classList.toggle('on')"></div>
+          </div>
+          <div class="settings-row">
+            <span class="settings-label">Heure du rappel</span>
+            <select class="settings-select">
+              <option>07:00</option>
+              <option>08:00</option>
+              <option selected>09:00</option>
+              <option>12:00</option>
+              <option>18:00</option>
+              <option>20:00</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="settings-card">
+          <div class="settings-card-title">&#127919; Objectifs</div>
+          <div class="settings-row">
+            <span class="settings-label">Mots par jour</span>
+            <select class="settings-select" onchange="updateGoal(this.value)">
+              <option value="10">10 mots</option>
+              <option value="15" selected>15 mots</option>
+              <option value="20">20 mots</option>
+              <option value="25">25 mots</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="settings-card">
+          <div class="settings-card-title">&#129504; Algorithme SM-2</div>
+          <p class="settings-desc">
+            R&#233;p&#233;tition espac&#233;e : les mots ma&#238;tris&#233;s
+            r&#233;apparaissent apr&#232;s 1 &#8594; 3 &#8594; 7 &#8594; 14
+            &#8594; 30 jours. Les mots difficiles sont revus le lendemain.
+          </p>
+          <div class="algo-steps">
+            <div class="algo-step"><span class="algo-dot dot-1">1j</span></div>
+            <div class="algo-arrow">&#8594;</div>
+            <div class="algo-step"><span class="algo-dot dot-2">3j</span></div>
+            <div class="algo-arrow">&#8594;</div>
+            <div class="algo-step"><span class="algo-dot dot-3">7j</span></div>
+            <div class="algo-arrow">&#8594;</div>
+            <div class="algo-step"><span class="algo-dot dot-4">14j</span></div>
+            <div class="algo-arrow">&#8594;</div>
+            <div class="algo-step"><span class="algo-dot dot-5">30j</span></div>
+          </div>
+        </div>
+
+        <div class="settings-card">
+          <div class="settings-card-title">&#9888; Zone danger</div>
+          <button class="btn-danger btn-full" onclick="resetAll()">
+            &#128465; R&#233;initialiser toute la progression
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
